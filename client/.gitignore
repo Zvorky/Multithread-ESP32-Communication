@@ -1,0 +1,7 @@
+.pio
+.vscode
+
+# Not Used by Now
+include/
+lib/
+test/
