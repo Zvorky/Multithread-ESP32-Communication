@@ -5,9 +5,9 @@
 - [ ] Especificar o protocolo de comunicação (formato das mensagens).
 
 ### Servidor (Python, PC)
-- [ ] Criar aplicação Python com dois threads:
-    - [ ] Thread para servidor UDP.
-    - [ ] Thread para servidor TCP.
+- [x] Criar aplicação Python com dois threads:
+    - [x] Thread para servidor UDP.
+    - [x] Thread para servidor TCP.
 - [ ] Implementar lógica da calculadora para todas as operações e suas inversões.
 - [ ] Tratar erros (operações inválidas, divisão por zero, etc).
 - [ ] Enviar resposta (float ou mensagem de erro) ao cliente.
