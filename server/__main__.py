@@ -25,6 +25,7 @@ HOST = ''
 UDP_PORT = 1337
 TCP_PORT = 4269
 TCP_CONNECTIONS = 3
+BUFSIZE = 1024
 TIMEOUT = 1.0
 
 ACTIVE = False
@@ -39,7 +40,7 @@ def udp_loop(udp_socket):
 
     while ACTIVE:
         try:
-            data, client = udp_socket.recvfrom(1024)  # buffer size is 1024 bytes
+            data, client = udp_socket.recvfrom(BUFSIZE)
             message = data.decode('utf-8')
             log(f'UDP message from {client}: {message}', 'UDP')
             # TODO: Implement processing
@@ -63,8 +64,16 @@ def tcp_loop(tcp_socket):
 
     while ACTIVE:
         try:
-            # TODO: Implement TCP handling
-            pass
+            connection, client = tcp_socket.accept()
+            log(f'TCP connection established by {client}', 'TCP')
+            data = connection.recv(BUFSIZE)
+            message = data.decode('utf-8')
+            log(f'TCP message from {client}: {message}', 'TCP')
+            # TODO: Implement processing
+            response = f'ACK: {message}'
+            tcp_socket.sendto(response.encode('utf-8'), client)
+            connection.close()
+            log(f'TCP connection {client} closed.', 'TCP')
         except socket.timeout:
             continue
         except Exception as e:
